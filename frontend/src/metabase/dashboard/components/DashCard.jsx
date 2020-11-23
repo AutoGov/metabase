@@ -32,6 +32,42 @@ const HEADER_ACTION_STYLE = {
   padding: 4,
 };
 
+const formatStringToCamelCase = str => {
+  const splitted = str.split("-");
+  if (splitted.length === 1) {
+    return splitted[0];
+  }
+  return (
+    splitted[0] +
+    splitted
+      .slice(1)
+      .map(word => word[0].toUpperCase() + word.slice(1))
+      .join("")
+  );
+};
+
+const getStyleObjectFromString = str => {
+  if (str) {
+    const style = {};
+    str.split(";").forEach(el => {
+      const [property, value] = el.split(":");
+      if (!property) {
+        return;
+      }
+
+      const formattedProperty = formatStringToCamelCase(property.trim());
+      style[formattedProperty] = value.trim();
+    });
+
+    console.log(`Valid style`);
+    console.log(style);
+
+    return style;
+  } else {
+    return {};
+  }
+};
+
 export default class DashCard extends Component {
   static propTypes = {
     dashcard: PropTypes.object.isRequired,
@@ -126,6 +162,12 @@ export default class DashCard extends Component {
       !isEditing &&
       mainCard.visualization_settings["dashcard.background"] === false;
 
+    const custom_styles = dashcard.visualization_settings["card.custom_styles"]
+      ? getStyleObjectFromString(
+          dashcard.visualization_settings["card.custom_styles"],
+        )
+      : {};
+
     return (
       <div
         className={cx(
@@ -142,7 +184,11 @@ export default class DashCard extends Component {
         }
       >
         <Visualization
-          className="flex-full"
+          className={`flex-full`}
+          // style={{
+          //   background: `linear-gradient(${color("brand")}, ${color("white")})`,
+          // }}
+          style={custom_styles}
           classNameWidgets={isEmbed && "text-light text-medium-hover"}
           error={errorMessage}
           errorIcon={errorIcon}

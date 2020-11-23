@@ -22,11 +22,19 @@ const COMMON_SETTINGS = {
     dashboard: true,
     useRawSeries: true,
   },
-  "card.description": {
+  "card.description": {  
     title: t`Description`,
     widget: "input",
     getDefault: series =>
       series.length === 1 ? series[0].card.description : null,
+    dashboard: true,
+    useRawSeries: true,
+  },
+  "card.custom_styles": {
+    title: t`Custom Styles`,
+    widget: "input",
+     getDefault: series =>
+      series.length === 1 ? series[0].card.custom_styles : null,
     dashboard: true,
     useRawSeries: true,
   },
