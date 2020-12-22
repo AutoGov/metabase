@@ -176,6 +176,7 @@ export default class Smart extends React.Component {
           <ScalarTitle
             title={settings["card.title"]}
             description={settings["card.description"]}
+            custom_styles={settings["card.custom_styles"]}
             onClick={
               onChangeCardAndRun &&
               (() => onChangeCardAndRun({ nextCard: card }))

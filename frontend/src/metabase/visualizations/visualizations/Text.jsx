@@ -64,6 +64,9 @@ export default class Text extends Component {
     "card.description": {
       dashboard: false,
     },
+    "card.custom_styles": {
+      dashboard: false,
+    },
     text: {
       value: "",
       default: "",

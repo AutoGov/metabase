@@ -511,6 +511,7 @@ export default class Visualization extends React.PureComponent {
               }
               actionButtons={extra}
               description={settings["card.description"]}
+              custom_styles={settings["card.custom_styles"]}
               settings={settings}
               onChangeCardAndRun={
                 this.props.onChangeCardAndRun
